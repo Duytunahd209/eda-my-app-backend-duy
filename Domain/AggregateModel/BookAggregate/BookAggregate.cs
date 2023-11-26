@@ -29,6 +29,21 @@ namespace my_app_backend.Domain.AggregateModel.BookAggregate
             return @event;
         }
 
+        public BookUpdateEvent UpdateBook(string name, string author, string type, bool locked)
+        {
+            var @event = new BookUpdateEvent
+            {
+                BookId = this.Id,
+                Name = name,
+                Author = author,
+                Type = type,
+                Locked = locked
+            };
+
+            Apply(@event);
+
+            return @event;
+        }
         public BookQuantityUpdatedEvent UdateQuantity(int quantity, int direction, string note)
         {
             var @event = new BookQuantityUpdatedEvent

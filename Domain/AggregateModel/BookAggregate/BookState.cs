@@ -18,6 +18,17 @@ namespace my_app_backend.Domain.AggregateModel.BookAggregate
             };
         }
 
+        public void When(BookUpdateEvent @event)
+        {
+            Book = new Book
+            {
+                Name = @event.Name,
+                Author = @event.Author,
+                Type = @event.Type,
+                Locked = @event.Locked
+            };
+        }
+
         public void When(BookQuantityUpdatedEvent @event)
         {
             Book.Quantity += @event.Quantity * @event.Direction;

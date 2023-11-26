@@ -40,6 +40,15 @@ namespace my_app_backend.Controllers.Writes
             return Ok(rs.ToApiResponse());
         }
 
+        [HttpPut("update/{id}")]
+        [Authorize(Roles = Constants.Roles.Admin)]
+        public async Task<ActionResult<ApiResponse<Guid>>> Post(Guid id,[FromBody] UpdateBookCommand command)
+        {
+            command.Id = id;
+            var rs = await _mediator.Send(command);
+            return Ok(rs.ToApiResponse());
+        }
+
         // PUT api/<BookController>/5
         [HttpPut("update-inventory")]
         //[Authorize(Roles = Constants.Roles.Admin)]
