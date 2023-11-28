@@ -53,6 +53,31 @@ namespace my_app_backend.Infrastructure.Store
             }
         }
 
+        public async Task Delete(BookAggregate aggregate)
+        {
+            using (var connection = new SqlConnection(_writeConnectionString))
+            {
+                try
+                {
+                    await connection.OpenAsync();
+                    var deleteEventsQuery = "DELETE FROM BookEvent WHERE AggregateId = @id;";
+                    await connection.ExecuteAsync(deleteEventsQuery, new { aggregate.Id });
+
+                    var deleteAggregateQuery = "DELETE FROM BookAggregate WHERE Id = @id;";
+                    await connection.ExecuteAsync(deleteAggregateQuery, new { aggregate.Id });
+                    var events = aggregate.Flush();
+                    foreach (var e in events)
+                    {
+                        await _mediator.Publish(e);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Book aggregate is delete : {ex}");
+                }
+            }
+        }
+
         public async Task Save(BookAggregate aggregate)
         {
             using (var connection = new SqlConnection(_writeConnectionString))

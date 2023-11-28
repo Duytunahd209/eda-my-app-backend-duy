@@ -4,5 +4,6 @@
     {
         public Task<BookAggregate> Get(Guid id);
         public Task Save(BookAggregate aggregate);
+        public Task Delete(BookAggregate aggregate);
     }
 }

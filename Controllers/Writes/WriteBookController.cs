@@ -49,6 +49,14 @@ namespace my_app_backend.Controllers.Writes
             return Ok(rs.ToApiResponse());
         }
 
+        [HttpDelete("delete/{id}")]
+        [Authorize(Roles = Constants.Roles.Admin)]
+        public async Task<ActionResult<ApiResponse<Guid>>> Delete(Guid id)
+        {
+            var rs =  await _mediator.Send(new DeleteBookCommand{ Id = id});
+            return Ok(rs.ToApiResponse());
+        }
+
         // PUT api/<BookController>/5
         [HttpPut("update-inventory")]
         //[Authorize(Roles = Constants.Roles.Admin)]

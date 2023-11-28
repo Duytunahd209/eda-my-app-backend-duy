@@ -9,5 +9,6 @@ namespace my_app_backend.Application.QueryRepositories
         Task<Result<BookDto>> GetById(Guid id);
         Task<Result> Insert(BookDto bookDto);
         Task<Result> Update(BookDto bookDto);
+        Task<Result> DeleteById(Guid id);
     }
 }

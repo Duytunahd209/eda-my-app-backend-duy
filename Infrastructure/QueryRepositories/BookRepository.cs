@@ -75,5 +75,24 @@ namespace my_app_backend.Infrastructure.QueryRepositories
                 return Result.Error($"Exception happened for update book: {ex}");
             }
         }
+
+        public async Task<Result> DeleteById(Guid id)
+        {
+            try
+            {
+                var result = await _booksCollection.DeleteOneAsync(x => x.Id == id);
+
+                if (result.DeletedCount == 0)
+                {
+                    return Result.Error($"No book found with id = {id}. Nothing deleted.");
+                }
+
+                return Result.Ok();
+            }
+            catch (Exception ex)
+            {
+                return Result.Error($"Exception happened for delete book: {ex}");
+            }
+        }
     }
 }

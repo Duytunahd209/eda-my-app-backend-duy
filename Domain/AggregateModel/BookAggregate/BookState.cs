@@ -29,6 +29,11 @@ namespace my_app_backend.Domain.AggregateModel.BookAggregate
             };
         }
 
+        public void When(BookDeleteEvent @event)
+        {
+            Book = null;
+        }
+
         public void When(BookQuantityUpdatedEvent @event)
         {
             Book.Quantity += @event.Quantity * @event.Direction;

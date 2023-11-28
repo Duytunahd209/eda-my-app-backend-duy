@@ -44,6 +44,19 @@ namespace my_app_backend.Domain.AggregateModel.BookAggregate
 
             return @event;
         }
+
+        public BookDeleteEvent DeleteBook()
+        {
+            var @event = new BookDeleteEvent
+            {
+                BookId = this.Id
+            };
+
+            Apply(@event);
+
+            return @event;
+        }
+
         public BookQuantityUpdatedEvent UdateQuantity(int quantity, int direction, string note)
         {
             var @event = new BookQuantityUpdatedEvent
