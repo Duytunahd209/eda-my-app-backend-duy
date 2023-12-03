@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace my_app_backend.Application.EventHandlers
 {
-    public class PutUpdateEventHandler : INotificationHandler<BookUpdateEvent>
+    public class PutUpdateEventHandler : INotificationHandler<BookUpdatedEvent>
     {
         private readonly IBookRepository _bookRepository;
         private readonly ILogger<PutUpdateEventHandler> _logger;
@@ -18,7 +18,7 @@ namespace my_app_backend.Application.EventHandlers
             _logger = logger;
         }
 
-        public async Task Handle(BookUpdateEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(BookUpdatedEvent notification, CancellationToken cancellationToken)
         {
             try
             {

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace my_app_backend.Application.EventHandlers
 {
-    public class DeleteEventHandler : INotificationHandler<BookDeleteEvent>
+    public class DeleteEventHandler : INotificationHandler<BookDeletedEvent>
     {
         private readonly IBookRepository _bookRepository;
         private readonly ILogger<DeleteEventHandler> _logger;
@@ -18,7 +18,7 @@ namespace my_app_backend.Application.EventHandlers
             _logger = logger;
         }
 
-        public async Task Handle(BookDeleteEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(BookDeletedEvent notification, CancellationToken cancellationToken)
         {
             try
             {

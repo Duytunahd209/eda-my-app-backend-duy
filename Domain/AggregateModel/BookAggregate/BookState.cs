@@ -18,7 +18,7 @@ namespace my_app_backend.Domain.AggregateModel.BookAggregate
             };
         }
 
-        public void When(BookUpdateEvent @event)
+        public void When(BookUpdatedEvent @event)
         {
             Book = new Book
             {
@@ -29,7 +29,7 @@ namespace my_app_backend.Domain.AggregateModel.BookAggregate
             };
         }
 
-        public void When(BookDeleteEvent @event)
+        public void When(BookDeletedEvent @event)
         {
             Book = null;
         }

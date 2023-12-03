@@ -10,6 +10,10 @@ namespace my_app_backend.Domain.AggregateModel.BookAggregate
         public DateTime ModifiedDate { get; set; }
         public BookState State { get; set; }
 
+        public int CreateCount { get; private set; }
+        public int UpdateCount { get; private set; }
+        public int DeleteCount { get; private set; }
+
         private List<IBookEvent> _pendingEvents = new List<IBookEvent>();
 
 
@@ -29,9 +33,9 @@ namespace my_app_backend.Domain.AggregateModel.BookAggregate
             return @event;
         }
 
-        public BookUpdateEvent UpdateBook(string name, string author, string type, bool locked)
+        public BookUpdatedEvent UpdateBook(string name, string author, string type, bool locked)
         {
-            var @event = new BookUpdateEvent
+            var @event = new BookUpdatedEvent
             {
                 BookId = this.Id,
                 Name = name,
@@ -45,9 +49,9 @@ namespace my_app_backend.Domain.AggregateModel.BookAggregate
             return @event;
         }
 
-        public BookDeleteEvent DeleteBook()
+        public BookDeletedEvent DeleteBook()
         {
-            var @event = new BookDeleteEvent
+            var @event = new BookDeletedEvent
             {
                 BookId = this.Id
             };

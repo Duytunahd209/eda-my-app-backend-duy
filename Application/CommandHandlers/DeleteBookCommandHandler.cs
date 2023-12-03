@@ -17,6 +17,10 @@ namespace my_app_backend.Application.CommandHandlers
             try
             {
                 var aggregate = await _bookEventStore.Get(request.Id);
+                if (aggregate.State.Book.Locked)
+                {
+                    return Result.Error("Book is locked to delete");
+                }
                 aggregate.DeleteBook();
                 await _bookEventStore.Delete(aggregate);
                 return Result.Ok();
